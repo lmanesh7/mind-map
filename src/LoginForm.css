@@ -1,0 +1,104 @@
+.auth-container {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  pointer-events: auto; /* Ensure clicks are registered */
+}
+
+.auth-tabs {
+  display: flex;
+  background: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 15px 0;
+  border: none;
+  background: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.auth-tab:hover {
+  background: #eaeaea;
+}
+
+.auth-tab.active {
+  background: white;
+  color: #1890ff;
+  border-bottom: 3px solid #1890ff;
+}
+
+.auth-content {
+  padding: 25px;
+}
+
+.label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box; /* Ensure padding doesn't widen the input */
+  pointer-events: auto; /* Ensure cursor works */
+  user-select: text; /* Ensure text selection works */
+}
+
+.auth-input:focus {
+  border-color: #1890ff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(24,144,255,0.2);
+}
+
+.button {
+  width: 100%;
+  padding: 12px;
+  background-color: #1890ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  pointer-events: auto;
+}
+
+.button:hover {
+  background-color: #096dd9;
+}
+
+.error {
+  color: #d9363e;
+  background: #ffccc7;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.success {
+  color: #389e0d;
+  background: #d9f7be;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  text-align: center;
+}
