@@ -23,6 +23,8 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import LoginForm from '../homePage';
 
+const API_URL = import.meta.env.VITE_API_URL || `http://localhost:${process.env.PORT || 3000}`;
+
 const UndoIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24">
     <path fill="currentColor" d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z" />
@@ -126,7 +128,7 @@ function Flow() {
     const token = tokenOverride || localStorage.getItem('token');
     if (!token) return;
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/mindmaps?search=${search}`, {
+      const res = await fetch(`${API_URL}/api/mindmaps?search=${search}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await res.json();
@@ -151,7 +153,7 @@ function Flow() {
     const token = localStorage.getItem('token');
     if (!token) return;
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/mindmaps/${id}`, {
+      const res = await fetch(`${API_URL}/api/mindmaps/${id}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       
@@ -187,7 +189,7 @@ function Flow() {
     if (!token) return;
     
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/mindmaps/${id}`, {
+      const res = await fetch(`${API_URL}/api/mindmaps/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -223,7 +225,7 @@ function Flow() {
     const payload = { title: currentTitle, nodes, edges };
     
     try {
-      let url = `${import.meta.env.VITE_API_URL}/api/mindmaps`;
+      let url = `${API_URL}/api/mindmaps`;
       let method = 'POST';
       if (currentMindmapId) {
         url = `${url}/${currentMindmapId}`;

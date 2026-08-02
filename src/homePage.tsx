@@ -8,6 +8,8 @@ type LoginFormProps = {
   onLoginSuccess: () => void;
 };
 
+const API_URL = import.meta.env.VITE_API_URL || `http://localhost:${process.env.PORT}`;
+
 const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
   const [activeTab, setActiveTab] = useState<'login' | 'register'>('login');
   const [username, setUsername] = useState('');
@@ -19,7 +21,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
     event.preventDefault();
     setErrorMsg('');
     try {
-      const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, { username, password });
+      const { data } = await axios.post(`${API_URL}/auth/login`, { username, password });
       if (data.success) {
         localStorage.setItem('token', data.token);
         onLoginSuccess();
@@ -36,7 +38,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
     setErrorMsg('');
     setSuccessMsg('');
     try {
-      const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, { username, password });
+      const { data } = await axios.post(`${API_URL}/auth/register`, { username, password });
       if (data.success) {
         setSuccessMsg('Registration successful! You can now log in.');
         setActiveTab('login');
