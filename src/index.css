@@ -18,10 +18,9 @@ body,
 }
 
 .react-flow__node-mindmap {
-  background: white;
+  background: transparent;
   border-radius: 2px;
   border: none;
-  padding: 6px 10px;
   font-weight: 700;
 }
 
@@ -80,4 +79,184 @@ body,
   outline: none;
   background: rgba(255, 255, 255, 0.25);
   pointer-events: all;
+}
+
+.deleteNodeButton {
+  background: transparent;
+  border: none;
+  color: #ff6b6b;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  pointer-events: all;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.inputWrapper:hover .deleteNodeButton {
+  opacity: 1;
+}
+
+.deleteNodeButton:hover {
+  background: #ffeeee;
+}
+
+.colorPickers {
+  display: flex;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: all;
+  margin-left: 4px;
+}
+
+.inputWrapper:hover .colorPickers {
+  opacity: 1;
+}
+
+.colorPicker {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  margin: 0 2px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.edgeDropdownWrapper {
+  opacity: 0.3;
+  transition: opacity 0.2s ease;
+}
+
+.edgeDropdownWrapper:hover {
+  opacity: 1;
+}
+
+.edgeArrowSelect {
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 2px;
+  font-size: 10px;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Sidebar and Modal Styles */
+.sidebarPanel {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  min-width: 250px;
+}
+
+.sidebarPanel h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.mapInput {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  flex: 1;
+}
+
+.mindmapList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.mindmapList li {
+  padding: 8px 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mindmapTitle {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 10px;
+}
+
+.deleteMapBtn {
+  background: none;
+  border: none;
+  color: #ff4d4f;
+  cursor: pointer;
+  font-size: 14px;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.deleteMapBtn:hover {
+  opacity: 1;
+  background: rgba(255, 77, 79, 0.1);
+}
+
+.mindmapList li:hover {
+  background: #f5f5f5;
+}
+
+.mindmapList li.active {
+  background: #e6f7ff;
+  border-left: 3px solid #1890ff;
+}
+
+.savePanel {
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  min-width: 300px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
 }
