@@ -30,7 +30,12 @@ app.post('/jpa/register', (req, res) => {
   res.redirect(307, '/auth/register');
 });
 
+app.get('/', (req, res) => {
+  res.status(200).json({success:true, message:"Hello World!"})
+})
+
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Backend server running on port ${PORT}`);
 });
+
