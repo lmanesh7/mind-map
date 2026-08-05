@@ -24,7 +24,7 @@
 - Using node area as a handle
 - Dynamic width and auto focus
 
-Demo: https://react-flow-mindmap.netlify.app
+Demo: https://mind-map-bf7j.onrender.com/
 
 ## Development
 
