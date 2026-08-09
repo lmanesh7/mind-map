@@ -18,12 +18,6 @@
 - Ability to **save multiple mind maps** per user.
 - A **sidebar dashboard** to quickly switch between or delete your saved mind maps.
 
-### The tutorial covers React Flow topics including
-- Using Zustand for state management
-- Custom node with an input field
-- Using node area as a handle
-- Dynamic width and auto focus
-
 Demo: https://mind-map-bf7j.onrender.com/
 
 ## Development
