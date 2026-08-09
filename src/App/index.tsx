@@ -13,7 +13,7 @@ import ReactFlow, {
 } from 'reactflow';
 import shallow from 'zustand/shallow';
 import { useStore as useZustandStore } from 'zustand';
-import useStore, { RFState } from './store';
+import useStore, { RFState, getInitialNodeLabel } from './store';
 import MindMapNode, { NodeData } from './MindMapNode';
 import MindMapEdge from './MindMapEdge';
 import { toPng } from 'html-to-image';
@@ -278,7 +278,7 @@ function Flow() {
         {
           id: 'root',
           type: 'mindmap',
-          data: { label: 'Root Node', color: '#1A192B', textColor: '#ffffff' },
+          data: { label: getInitialNodeLabel(), color: '#1A192B', textColor: '#ffffff' },
           position: { x: 0, y: 0 },
         }
       ],
@@ -471,6 +471,7 @@ function Flow() {
             {isLoggedIn && (
               <Button variant="text" style={{ marginLeft: '10px' }} onClick={() => {
                 localStorage.removeItem('token');
+                localStorage.removeItem('username');
                 setIsLoggedIn(false);
                 setMindmaps([]);
                 handleNewMap();
@@ -490,6 +491,12 @@ function Flow() {
               setIsLoggedIn(true);
               setShowLoginModal(false);
               fetchMindmaps();
+              
+              const nodes = useStore.getState().nodes;
+              const rootNode = nodes.find((n: Node) => n.id === 'root');
+              if (rootNode && rootNode.data.label === "Laxmana's Mind Map") {
+                 useStore.getState().updateNodeLabel('root', getInitialNodeLabel());
+              }
             }} />
           </div>
         </div>
