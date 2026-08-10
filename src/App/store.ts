@@ -42,6 +42,14 @@ export type RFState = {
   deleteNode: (nodeId: string) => void;
 };
 
+export const getInitialNodeLabel = () => {
+  const username = localStorage.getItem('username');
+  if (username) {
+    return "My Mind Map";
+  }
+  return "Laxmana's Mind Map";
+};
+
 const savedNodes = sessionStorage.getItem('mindmap-nodes');
 const savedEdges = sessionStorage.getItem('mindmap-edges');
 
@@ -49,7 +57,7 @@ const initialNodes = savedNodes ? JSON.parse(savedNodes) : [
   {
     id: 'root',
     type: 'mindmap',
-    data: { label: 'React Flow Mind Map' },
+    data: { label: getInitialNodeLabel() },
     position: { x: 0, y: 0 },
     dragHandle: '.dragHandle',
   },

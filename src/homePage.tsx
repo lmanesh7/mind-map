@@ -24,6 +24,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
       const { data } = await axios.post(`${API_URL}/auth/login`, { username, password });
       if (data.success) {
         localStorage.setItem('token', data.token);
+        if (data.username) {
+          localStorage.setItem('username', data.username);
+        }
         onLoginSuccess();
       } else {
         setErrorMsg(data.message || 'Login failed!');

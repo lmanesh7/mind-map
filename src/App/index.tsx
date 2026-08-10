@@ -13,7 +13,7 @@ import ReactFlow, {
 } from 'reactflow';
 import shallow from 'zustand/shallow';
 import { useStore as useZustandStore } from 'zustand';
-import useStore, { RFState } from './store';
+import useStore, { RFState, getInitialNodeLabel } from './store';
 import MindMapNode, { NodeData } from './MindMapNode';
 import MindMapEdge from './MindMapEdge';
 import { toPng } from 'html-to-image';
@@ -22,6 +22,7 @@ import 'reactflow/dist/style.css';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import LoginForm from '../homePage';
+import OnboardingTour from '../OnboardingTour';
 
 const API_URL = import.meta.env.VITE_API_URL || `http://localhost:${process.env.PORT || 3000}`;
 
@@ -43,6 +44,11 @@ const DownloadIcon = () => (
 const PdfIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24">
     <path fill="currentColor" d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/>
+  </svg>
+);
+const HelpIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z" />
   </svg>
 );
 
@@ -74,6 +80,7 @@ function Flow() {
   const [currentTitle, setCurrentTitle] = useState(`New Mind Map - ${new Date().toLocaleString()}`);
   const [searchQuery, setSearchQuery] = useState('');
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const [runTour, setRunTour] = useState(false);
 
   useEffect(() => {
     const unsub = useStore.subscribe((state, prevState) => {
@@ -278,7 +285,7 @@ function Flow() {
         {
           id: 'root',
           type: 'mindmap',
-          data: { label: 'Root Node', color: '#1A192B', textColor: '#ffffff' },
+          data: { label: getInitialNodeLabel(), color: '#1A192B', textColor: '#ffffff' },
           position: { x: 0, y: 0 },
         }
       ],
@@ -380,6 +387,7 @@ function Flow() {
 
   return (
     <>
+      <OnboardingTour run={runTour} setRun={setRunTour} />
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -398,7 +406,7 @@ function Flow() {
         <Controls showInteractive={false} />
         
         {isLoggedIn && (
-          <Panel position="top-left" className="sidebarPanel">
+          <Panel position="top-left" className="sidebarPanel tour-sidebar">
             <h3>My Mind Maps</h3>
             <div style={{ display: 'flex', gap: '8px', marginBottom: '10px' }}>
               <input 
@@ -422,7 +430,7 @@ function Flow() {
         )}
 
         <Panel position="top-right">
-          <div className="savePanel">
+          <div className="savePanel tour-toolbar">
             <IconButton 
               onClick={() => useStore.temporal.getState().undo()} 
               disabled={useZustandStore(useStore.temporal, (state: any) => state.pastStates.length === 0)}
@@ -453,6 +461,13 @@ function Flow() {
             >
               <PdfIcon />
             </IconButton>
+            <IconButton 
+              onClick={() => { setRunTour(true); localStorage.removeItem('hasSeenOnboarding'); }} 
+              style={{ marginRight: '10px' }}
+              title="Take Tour"
+            >
+              <HelpIcon />
+            </IconButton>
             <input 
               type="text" 
               value={currentTitle} 
@@ -471,6 +486,7 @@ function Flow() {
             {isLoggedIn && (
               <Button variant="text" style={{ marginLeft: '10px' }} onClick={() => {
                 localStorage.removeItem('token');
+                localStorage.removeItem('username');
                 setIsLoggedIn(false);
                 setMindmaps([]);
                 handleNewMap();
@@ -490,6 +506,12 @@ function Flow() {
               setIsLoggedIn(true);
               setShowLoginModal(false);
               fetchMindmaps();
+              
+              const nodes = useStore.getState().nodes;
+              const rootNode = nodes.find((n: Node) => n.id === 'root');
+              if (rootNode && rootNode.data.label === "Laxmana's Mind Map") {
+                 useStore.getState().updateNodeLabel('root', getInitialNodeLabel());
+              }
             }} />
           </div>
         </div>

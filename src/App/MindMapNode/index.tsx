@@ -37,7 +37,7 @@ function MindMapNode({ id, data }: NodeProps<NodeData>) {
   return (
     <>
       <div 
-        className="inputWrapper"
+        className={`inputWrapper ${id === 'root' ? 'tour-root-node' : ''}`}
         style={{ backgroundColor: bgColor, borderRadius: '2px', padding: '6px 12px' }}
       >
         <div className="dragHandle">
