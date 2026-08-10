@@ -41,6 +41,8 @@ const OnboardingTour: React.FC<OnboardingTourProps> = ({ run, setRun }) => {
       target: '.tour-root-node',
       content: 'Hover over a node and when your cursor shows a + icon, click and drag to create a new child node.',
       placement: 'top',
+      spotlightPadding: 30,
+      hideOverlay: true,
     },
     {
       target: '.tour-toolbar',
