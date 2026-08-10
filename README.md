@@ -1,8 +1,6 @@
 # React Flow Mind Map App
 
-![mindmap](https://user-images.githubusercontent.com/2857535/210797861-510f0a3d-fd67-46a7-8a8d-c409cb7dbcdb.png)
-
-This mind map app was created as an example for the blog post ["Tutorial: Build a Mind Map App with React Flow"](https://reactflow.dev/blog/mind-map-app-with-react-flow/), which has a step-by-step guide on how to build a this mindmap (for intermediate or advanced React users). [React Flow](https://reactflow.dev) is a library for creating node-based UIs.
+<img width="1920" height="945" alt="new_mind_map___8_2_2026__5_23_08_pm" src="https://github.com/user-attachments/assets/9d0dd40d-892e-4aeb-bed1-93f9d6fa86cb" />
 
 ### Features of the mindmap include
 - Quickly create new nodes on drag + mouse-release
@@ -20,13 +18,7 @@ This mind map app was created as an example for the blog post ["Tutorial: Build 
 - Ability to **save multiple mind maps** per user.
 - A **sidebar dashboard** to quickly switch between or delete your saved mind maps.
 
-### The tutorial covers React Flow topics including
-- Using Zustand for state management
-- Custom node with an input field
-- Using node area as a handle
-- Dynamic width and auto focus
-
-Demo: https://react-flow-mindmap.netlify.app
+Demo: https://mind-map-bf7j.onrender.com/
 
 ## Development
 
