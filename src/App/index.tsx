@@ -23,6 +23,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import LoginForm from '../homePage';
 import OnboardingTour from '../OnboardingTour';
+import Footer from '../Footer';
 
 const API_URL = import.meta.env.VITE_API_URL || `http://localhost:${process.env.PORT || 3000}`;
 
@@ -516,6 +517,7 @@ function Flow() {
           </div>
         </div>
       )}
+      <Footer />
     </>
   );
 }
